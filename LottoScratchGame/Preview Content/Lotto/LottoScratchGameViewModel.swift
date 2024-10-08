@@ -1,8 +1,6 @@
-// LottoScratchGameViewModel.swift
-
-import AVFoundation
-import Combine
 import SwiftUI
+import Combine
+import AVFoundation
 
 @Observable
 final class LottoScratchGameViewModel {
@@ -30,8 +28,28 @@ final class LottoScratchGameViewModel {
   // MARK: - Initializer
 
   init() {
-    targetSymbol = Constants.possibleSymbols.randomElement() ?? Constants.possibleSymbols[0]
-    symbols = generateGridSymbols()
+    self.targetSymbol = Constants.possibleSymbols.randomElement() ?? Constants.possibleSymbols[0]
+    self.symbols = generateGridSymbols()
+    observeSymbols()
+  }
+
+  // MARK: - Reset Game
+
+  func resetGame() {
+    // Cancel existing subscriptions
+    cancellables.removeAll()
+
+    // Reset properties
+    self.revealedSymbols = Set<UUID>()
+    self.matchedSymbolCount = 0
+    self.hasWon = false
+    self.showConfetti = false
+
+    // Generate new target symbol and symbols grid
+    self.targetSymbol = Constants.possibleSymbols.randomElement() ?? Constants.possibleSymbols[0]
+    self.symbols = generateGridSymbols()
+
+    // Observe the new symbols
     observeSymbols()
   }
 
@@ -40,7 +58,7 @@ final class LottoScratchGameViewModel {
   private func generateGridSymbols() -> [ScratchSymbolWrapper] {
     var generatedSymbols = [ScratchSymbol]()
     var targetSymbolCount = 0
-    let totalSymbols = gridRows * gridColumns
+//    let totalSymbols = gridRows * gridColumns
 
     // Calculate the grid size and positions
     let cellWidth = cardSize.width / CGFloat(gridColumns)
@@ -50,6 +68,7 @@ final class LottoScratchGameViewModel {
       for column in 0..<gridColumns {
         let symbolName: String
 
+        // Ensure the target symbol appears at least winningSymbolCount times
 //        if targetSymbolCount < winningSymbolCount {
 //          symbolName = targetSymbol
 //          targetSymbolCount += 1
@@ -78,10 +97,9 @@ final class LottoScratchGameViewModel {
 
   // MARK: - Observing Symbols
 
-  // Observe symbols and handle changes as before
   func observeSymbols() {
     for symbolWrapper in symbols {
-      symbolWrapper.$symbol.sink { [weak self] _ in
+      symbolWrapper.$symbol.sink { [weak self] newSymbol in
         DispatchQueue.main.async {
           self?.symbolDidChange(symbolWrapper)
         }

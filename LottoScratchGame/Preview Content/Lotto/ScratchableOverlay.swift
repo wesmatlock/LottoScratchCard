@@ -1,5 +1,3 @@
-// ScratchableOverlay.swift
-
 import SwiftUI
 
 struct ScratchableOverlay: View {
@@ -26,20 +24,40 @@ struct ScratchableOverlay: View {
       .gesture(
         DragGesture(minimumDistance: 0)
           .onChanged { value in
-            // Determine which cell is being scratched
+            // Determine which cells are being scratched
             let x = Int(value.location.x / cellWidth)
             let y = Int(value.location.y / cellHeight)
-            let index = y * gridSize + x
             if x >= 0 && x < gridSize && y >= 0 && y < gridSize {
-              if !symbol.symbol.scratchedCells.contains(index) {
-                symbol.symbol.scratchedCells.insert(index)
-                checkIfFullyRevealed()
-              }
+              scratchCellsAt(x: x, y: y)
             }
           }
       )
     }
     .compositingGroup() // Ensures correct rendering of opacity
+  }
+
+  private func scratchCellsAt(x: Int, y: Int) {
+    let gridSize = self.gridSize
+    let radius = 1 // Adjust radius as needed
+
+    let minX = max(0, x - radius)
+    let maxX = min(gridSize - 1, x + radius)
+    let minY = max(0, y - radius)
+    let maxY = min(gridSize - 1, y + radius)
+
+    guard minX <= maxX, minY <= maxY else {
+      return // Invalid range, do nothing
+    }
+
+    for newX in minX...maxX {
+      for newY in minY...maxY {
+        let index = newY * gridSize + newX
+        if !symbol.symbol.scratchedCells.contains(index) {
+          symbol.symbol.scratchedCells.insert(index)
+        }
+      }
+    }
+    checkIfFullyRevealed()
   }
 
   private func checkIfFullyRevealed() {

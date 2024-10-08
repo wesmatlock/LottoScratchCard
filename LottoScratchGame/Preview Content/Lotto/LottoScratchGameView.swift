@@ -7,9 +7,10 @@ struct LottoScratchGameView: View {
 
   var body: some View {
     VStack {
-      TargetSymbolView(viewModel: viewModel)
+//      TargetSymbolView(viewModel: viewModel)
       ScratchCardView(viewModel: viewModel)
     }
+    .padding()
   }
 }
 

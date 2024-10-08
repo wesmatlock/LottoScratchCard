@@ -1,5 +1,3 @@
-// ScratchCardView.swift
-
 import SwiftUI
 
 struct ScratchCardView: View {
@@ -7,16 +5,37 @@ struct ScratchCardView: View {
   @Namespace private var animationNamespace
 
   var body: some View {
-    ZStack {
-      symbolsBackgroundView()
+    VStack {
+      // Display the target symbol or game title
+      Text("Match 3 \(Image(systemName: viewModel.targetSymbol)) to Win!")
+        .font(.headline)
+        .padding()
 
-      if viewModel.showConfetti {
-        ConfettiView()
-          .transition(.opacity)
-          .animation(.easeOut(duration: 1), value: viewModel.showConfetti)
+      ZStack {
+        symbolsBackgroundView()
+
+        if viewModel.showConfetti {
+          ConfettiView()
+            .transition(.opacity)
+            .animation(.easeOut(duration: 1), value: viewModel.showConfetti)
+        }
       }
+      .padding()
+
+      // Add the reset button
+      Button(action: {
+        viewModel.resetGame()
+      }) {
+        Text("Reset Game")
+          .font(.headline)
+          .padding()
+          .frame(maxWidth: .infinity)
+          .background(Color.blue.opacity(0.8))
+          .foregroundColor(.white)
+          .cornerRadius(10)
+      }
+      .padding()
     }
-    .padding()
   }
 
   // MARK: - Symbols Background View
