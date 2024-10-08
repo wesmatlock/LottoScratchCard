@@ -1,0 +1,58 @@
+# options
+--header "{file}"
+--self remove # redundantSelf
+--importgrouping testable-bottom # sortImports
+--commas always # trailingCommas
+--trimwhitespace always # trailingSpace
+--ifdef no-indent #indent
+--indentstrings true #indent
+--wraparguments before-first # wrapArguments
+--wrapparameters before-first # wrapArguments
+#--wrapcollections before-first # wrapArguments
+--wrapconditions before-first # wrapArguments
+--wrapreturntype if-multiline #wrapArguments
+--closingparen balanced # wrapArguments
+--wraptypealiases before-first # wrapArguments
+--funcattributes prev-line # wrapAttributes
+--typeattributes prev-line # wrapAttributes
+--wrapternary before-operators # wrap
+--extensionacl on-declarations # extensionAccessControl
+--patternlet inline # hoistPatternLet
+--redundanttype inferred # redundantType
+--swiftversion 5.5
+
+# rules
+--rules anyObjectProtocol
+--rules blankLinesBetweenScopes
+--rules consecutiveSpaces
+--rules duplicateImports
+--rules extensionAccessControl
+--rules hoistPatternLet
+--rules redundantParens
+--rules redundantReturn
+--rules redundantSelf
+--rules redundantType
+--rules redundantPattern
+--rules redundantGet
+--rules redundantFileprivate
+--rules redundantRawValues
+--rules sortImports
+--rules strongifiedSelf
+--rules trailingSpace
+#--rules trailingClosures
+--rules typeSugar
+--rules wrap
+--rules wrapArguments
+--rules wrapAttributes
+--rules braces
+--rules redundantClosure
+--rules redundantInit
+--rules redundantVoidReturnType
+--rules spaceInsideBraces
+--rules spaceAroundBraces
+--rules enumNamespaces
+--rules blockComments
+--rules preferKeyPath
+--rules fileHeader
+
+#exclude
