@@ -71,12 +71,12 @@ final class LottoScratchGameViewModel {
         let symbolName: String
 
         // Ensure the target symbol appears at least winningSymbolCount times
-//        if targetSymbolCount < winningSymbolCount {
-//          symbolName = targetSymbol
-//          targetSymbolCount += 1
-//        } else {
+        if targetSymbolCount < winningSymbolCount {
+          symbolName = targetSymbol
+          targetSymbolCount += 1
+        } else {
           symbolName = Constants.possibleSymbols.randomElement() ?? Constants.possibleSymbols[0]
-//        }
+        }
 
         let position = CGRect(
           x: CGFloat(column) * cellWidth + cellWidth / 2 - symbolSize / 2,

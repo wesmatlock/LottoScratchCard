@@ -39,7 +39,7 @@ struct ScratchableOverlay: View {
   }
 
   private func scratchCellsAt(x: Int, y: Int) {
-    let gridSize = gridSize
+//    let gridSize = gridSize
     let radius = 1 // Adjust radius as needed
 
     let minX = max(0, x - radius)
@@ -59,12 +59,12 @@ struct ScratchableOverlay: View {
         }
       }
     }
-    checkIfFullyRevealed()
+    checkIfRevealed()
   }
 
-  private func checkIfFullyRevealed() {
+  private func checkIfRevealed() {
     let scratchedPercentage = (Double(symbol.symbol.scratchedCells.count) / Double(symbol.symbol.totalCells)) * 100
-    if scratchedPercentage >= 90 {
+    if scratchedPercentage >= 80 {
       symbol.symbol.isFullyRevealed = true
     }
   }

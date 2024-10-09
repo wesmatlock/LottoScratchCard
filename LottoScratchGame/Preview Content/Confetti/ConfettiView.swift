@@ -10,8 +10,8 @@ struct ConfettiView: View {
   var body: some View {
     GeometryReader { geometry in
       ZStack {
-        Color.black // Apply the background color here to fill the entire view.
-          .edgesIgnoringSafeArea(.all) // Make sure the background covers the whole screen.
+//        Color.black // Apply the background color here to fill the entire view.
+//          .edgesIgnoringSafeArea(.all) // Make sure the background covers the whole screen.
 
         ForEach(confettiParticles) { particle in
           particle

@@ -3,7 +3,6 @@
 import SwiftUI
 
 struct ConfettiParticle: View, Identifiable {
-  // Using an integer for the `id` to improve performance.
   let id: Int
   var color: Color
   var size: CGFloat
