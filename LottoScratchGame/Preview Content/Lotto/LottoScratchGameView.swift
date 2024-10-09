@@ -7,10 +7,17 @@ struct LottoScratchGameView: View {
 
   var body: some View {
     VStack {
+      Spacer()
 //      TargetSymbolView(viewModel: viewModel)
+//        .frame(maxWidth: .infinity, alignment: .center)
       ScratchCardView(viewModel: viewModel)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .aspectRatio(1, contentMode: .fit)
+//        .padding()
+      Spacer()
     }
-    .padding()
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+    .background(Color.red.opacity(0.2))
   }
 }
 

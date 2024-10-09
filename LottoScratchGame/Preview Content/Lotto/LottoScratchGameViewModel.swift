@@ -1,6 +1,8 @@
-import SwiftUI
-import Combine
+// LottoScratchGameViewModel.swift
+
 import AVFoundation
+import Combine
+import SwiftUI
 
 @Observable
 final class LottoScratchGameViewModel {
@@ -28,8 +30,8 @@ final class LottoScratchGameViewModel {
   // MARK: - Initializer
 
   init() {
-    self.targetSymbol = Constants.possibleSymbols.randomElement() ?? Constants.possibleSymbols[0]
-    self.symbols = generateGridSymbols()
+    targetSymbol = Constants.possibleSymbols.randomElement() ?? Constants.possibleSymbols[0]
+    symbols = generateGridSymbols()
     observeSymbols()
   }
 
@@ -40,14 +42,14 @@ final class LottoScratchGameViewModel {
     cancellables.removeAll()
 
     // Reset properties
-    self.revealedSymbols = Set<UUID>()
-    self.matchedSymbolCount = 0
-    self.hasWon = false
-    self.showConfetti = false
+    revealedSymbols = Set<UUID>()
+    matchedSymbolCount = 0
+    hasWon = false
+    showConfetti = false
 
     // Generate new target symbol and symbols grid
-    self.targetSymbol = Constants.possibleSymbols.randomElement() ?? Constants.possibleSymbols[0]
-    self.symbols = generateGridSymbols()
+    targetSymbol = Constants.possibleSymbols.randomElement() ?? Constants.possibleSymbols[0]
+    symbols = generateGridSymbols()
 
     // Observe the new symbols
     observeSymbols()
@@ -99,7 +101,7 @@ final class LottoScratchGameViewModel {
 
   func observeSymbols() {
     for symbolWrapper in symbols {
-      symbolWrapper.$symbol.sink { [weak self] newSymbol in
+      symbolWrapper.$symbol.sink { [weak self] _ in
         DispatchQueue.main.async {
           self?.symbolDidChange(symbolWrapper)
         }

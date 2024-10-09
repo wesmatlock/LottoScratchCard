@@ -1,3 +1,5 @@
+// ScratchableOverlay.swift
+
 import SwiftUI
 
 struct ScratchableOverlay: View {
@@ -37,7 +39,7 @@ struct ScratchableOverlay: View {
   }
 
   private func scratchCellsAt(x: Int, y: Int) {
-    let gridSize = self.gridSize
+    let gridSize = gridSize
     let radius = 1 // Adjust radius as needed
 
     let minX = max(0, x - radius)

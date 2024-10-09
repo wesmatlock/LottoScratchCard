@@ -1,3 +1,5 @@
+// ScratchCardView.swift
+
 import SwiftUI
 
 struct ScratchCardView: View {
