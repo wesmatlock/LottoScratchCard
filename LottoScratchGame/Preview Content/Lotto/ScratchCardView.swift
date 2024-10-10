@@ -9,9 +9,14 @@ struct ScratchCardView: View {
   var body: some View {
     VStack {
       // Display the target symbol or game title
-      Text("Match 3 \(Image(systemName: viewModel.targetSymbol)) to Win!")
-        .font(.headline)
-        .padding()
+//      HStack {
+//        Text("Match")
+//        Image(systemName: viewModel.targetSymbol)
+//          .foregroundColor(.symbol)
+//        Text("to Win!")
+//      }
+//      .font(.headline)
+//      .padding()
 
       ZStack {
         symbolsBackgroundView()

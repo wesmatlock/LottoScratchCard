@@ -8,13 +8,12 @@ struct TargetSymbolView: View {
   var body: some View {
     VStack {
       Text("Match this symbol to win!")
-        .font(.headline)
         .padding(.bottom, 5)
 
       Image(systemName: viewModel.targetSymbol)
         .resizable()
         .frame(width: viewModel.symbolSize, height: viewModel.symbolSize)
-        .foregroundStyle(Color.yellow)
+        .foregroundStyle(Color.symbol)
         .scaleEffect(viewModel.hasWon ? 1 : 1.5)
         .opacity(viewModel.hasWon ? 1 : 0.7)
         .animation(
@@ -24,16 +23,15 @@ struct TargetSymbolView: View {
 
       if viewModel.hasWon {
         Text("Congratulations! You matched: \(viewModel.matchedSymbolCount) \(viewModel.targetSymbol) symbols!")
-          .font(.headline)
           .foregroundStyle(Color.green)
           .padding()
       } else {
         Text("Matched Symbols: \(viewModel.matchedSymbolCount)")
-          .font(.subheadline)
-          .foregroundStyle(Color.white)
+          .foregroundStyle(Color.black)
           .padding()
       }
     }
+    .font(.headline)
   }
 }
 

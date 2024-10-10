@@ -14,7 +14,7 @@ struct SymbolView: View {
         .resizable()
         .frame(width: symbol.symbol.position.width, height: symbol.symbol.position.height)
         .position(x: symbol.symbol.position.midX, y: symbol.symbol.position.midY)
-        .foregroundStyle(Color.white)
+        .foregroundStyle(Color.symbol)
         .matchedGeometryEffect(id: symbol.symbol.id, in: animationNamespace)
         .accessibilityElement()
         .accessibilityLabel(Text(symbol.symbol.symbolName))

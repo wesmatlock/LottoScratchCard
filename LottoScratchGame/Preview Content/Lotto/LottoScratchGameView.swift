@@ -8,16 +8,16 @@ struct LottoScratchGameView: View {
   var body: some View {
     VStack {
       Spacer()
-//      TargetSymbolView(viewModel: viewModel)
-//        .frame(maxWidth: .infinity, alignment: .center)
+      TargetSymbolView(viewModel: viewModel)
+        .frame(maxWidth: .infinity)
+        .padding(.top, 16)
       ScratchCardView(viewModel: viewModel)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-        .aspectRatio(1, contentMode: .fit)
-//        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .aspectRatio(0.6, contentMode: .fit)
       Spacer()
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     .background(Color.red.opacity(0.2))
+//    .edgesIgnoringSafeArea(.bottom)
   }
 }
 

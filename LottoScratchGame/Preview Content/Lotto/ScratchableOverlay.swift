@@ -17,7 +17,7 @@ struct ScratchableOverlay: View {
           let column = index % gridSize
 
           Rectangle()
-            .fill(Color.gray)
+            .fill(Color.foil)
             .frame(width: cellWidth, height: cellHeight)
             .position(x: (CGFloat(column) + 0.5) * cellWidth, y: (CGFloat(row) + 0.5) * cellHeight)
             .opacity(symbol.symbol.scratchedCells.contains(index) ? 0 : 1)

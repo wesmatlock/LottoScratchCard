@@ -16,7 +16,7 @@ final class LottoScratchGameViewModel {
   var hasWon = false
   var showConfetti = false
 
-  let cardSize = CGSize(width: 350, height: 600)
+  let cardSize = CGSize(width: 350, height: 500)
   let symbolSize: CGFloat = 40
 
   var targetSymbol: String
@@ -59,12 +59,12 @@ final class LottoScratchGameViewModel {
 
   private func generateGridSymbols() -> [ScratchSymbolWrapper] {
     var generatedSymbols = [ScratchSymbol]()
-    var targetSymbolCount = 0
-//    let totalSymbols = gridRows * gridColumns
-
     // Calculate the grid size and positions
     let cellWidth = cardSize.width / CGFloat(gridColumns)
     let cellHeight = cardSize.height / CGFloat(gridRows)
+
+    //    var targetSymbolCount = 0
+    //    let totalSymbols = gridRows * gridColumns
 
     for row in 0..<gridRows {
       for column in 0..<gridColumns {
@@ -124,7 +124,7 @@ final class LottoScratchGameViewModel {
   // MARK: - Game Logic
 
   func checkWinningCondition() {
-    if matchedSymbolCount >= winningSymbolCount {
+    if revealedSymbols.count == symbols.count && matchedSymbolCount >= 1 {
       withAnimation {
         hasWon = true
         showConfetti = true
