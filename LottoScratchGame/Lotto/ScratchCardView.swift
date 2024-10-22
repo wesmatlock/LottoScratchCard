@@ -20,7 +20,7 @@ struct ScratchCardView: View {
 
       ZStack {
         symbolsBackgroundView()
-
+        
         if viewModel.showConfetti {
           ConfettiView()
             .transition(.opacity)
@@ -37,8 +37,8 @@ struct ScratchCardView: View {
           .font(.headline)
           .padding()
           .frame(maxWidth: .infinity)
-          .background(Color.blue.opacity(0.8))
-          .foregroundColor(.white)
+          .background(Color.card.opacity(0.8))
+          .foregroundColor(.black)
           .cornerRadius(10)
       }
       .padding()
@@ -50,7 +50,7 @@ struct ScratchCardView: View {
   @ViewBuilder
   private func symbolsBackgroundView() -> some View {
     RoundedRectangle(cornerRadius: 20)
-      .fill(Color.blue)
+      .fill(Color.card)
       .frame(width: viewModel.cardSize.width, height: viewModel.cardSize.height)
       .overlay {
         ForEach(viewModel.symbols) { symbolWrapper in

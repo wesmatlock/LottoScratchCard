@@ -4,6 +4,7 @@ import Foundation
 
 class ScratchSymbolWrapper: ObservableObject, Identifiable {
   @Published var symbol: ScratchSymbol
+  @Published var isMatched: Bool = false
 
   var id: UUID {
     symbol.id

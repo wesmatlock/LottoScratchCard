@@ -22,9 +22,12 @@ struct TargetSymbolView: View {
         )
 
       if viewModel.hasWon {
-        Text("Congratulations! You matched: \(viewModel.matchedSymbolCount) \(viewModel.targetSymbol) symbols!")
-          .foregroundStyle(Color.green)
-          .padding()
+        HStack {
+          Text("Congratulations! You matched: \(viewModel.matchedSymbolCount)")
+          Image(systemName: viewModel.targetSymbol)
+        }
+        .foregroundStyle(Color.green)
+        .padding()
       } else {
         Text("Matched Symbols: \(viewModel.matchedSymbolCount)")
           .foregroundStyle(Color.black)

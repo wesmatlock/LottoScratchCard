@@ -11,7 +11,7 @@ final class LottoScratchGameViewModel {
   var symbols: [ScratchSymbolWrapper] = []
   var revealedSymbols = Set<UUID>()
   var matchedSymbolCount = 0
-  var winningSymbolCount = 3
+  var winningSymbolCount = 1
 
   var hasWon = false
   var showConfetti = false
@@ -20,6 +20,9 @@ final class LottoScratchGameViewModel {
   let symbolSize: CGFloat = 40
 
   var targetSymbol: String
+
+  // Decide whether to include the target symbol with a 5% chance 0.05
+  let includeTargetSymbol = Double.random(in: 0..<1) < 0.95
 
   private let gridRows = 9
   private let gridColumns = 3
@@ -63,20 +66,25 @@ final class LottoScratchGameViewModel {
     let cellWidth = cardSize.width / CGFloat(gridColumns)
     let cellHeight = cardSize.height / CGFloat(gridRows)
 
-    //    var targetSymbolCount = 0
-    //    let totalSymbols = gridRows * gridColumns
+    // If we are including the target symbol, select a random index for its position
+    let totalCells = gridRows * gridColumns
+    var targetSymbolIndex: Int? = nil
+    if includeTargetSymbol {
+      targetSymbolIndex = Int.random(in: 0..<totalCells)
+    }
+    var currentIndex = 0
 
     for row in 0..<gridRows {
       for column in 0..<gridColumns {
         let symbolName: String
 
-        // Ensure the target symbol appears at least winningSymbolCount times
-//        if targetSymbolCount < winningSymbolCount {
-//          symbolName = targetSymbol
-//          targetSymbolCount += 1
-//        } else {
+        if let targetIndex = targetSymbolIndex, currentIndex == targetIndex {
+          // Insert the target symbol at the selected position
+          symbolName = targetSymbol
+        } else {
+          // Select a random symbol from possible symbols
           symbolName = Constants.possibleSymbols.randomElement() ?? Constants.possibleSymbols[0]
-//        }
+        }
 
         let position = CGRect(
           x: CGFloat(column) * cellWidth + cellWidth / 2 - symbolSize / 2,
@@ -87,6 +95,7 @@ final class LottoScratchGameViewModel {
 
         let symbol = ScratchSymbol(symbolName: symbolName, position: position)
         generatedSymbols.append(symbol)
+        currentIndex += 1
       }
     }
 
@@ -113,18 +122,19 @@ final class LottoScratchGameViewModel {
     if symbolWrapper.symbol.isFullyRevealed && !revealedSymbols.contains(symbolWrapper.id) {
       revealedSymbols.insert(symbolWrapper.id)
       if symbolWrapper.symbol.symbolName == targetSymbol {
+        playSound(named: "match")
         matchedSymbolCount += 1
+        symbolWrapper.isMatched = true
         triggerHapticFeedback()
-        playSound(named: "scratch")
-        checkWinningCondition()
       }
+      checkWinningCondition()
     }
   }
 
   // MARK: - Game Logic
 
   func checkWinningCondition() {
-    if revealedSymbols.count == symbols.count && matchedSymbolCount >= 1 {
+    if revealedSymbols.count == symbols.count && matchedSymbolCount >= winningSymbolCount {
       withAnimation {
         hasWon = true
         showConfetti = true

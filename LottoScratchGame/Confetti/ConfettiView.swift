@@ -1,18 +1,13 @@
-// ConfettiView.swift
-
 import SwiftUI
 
 struct ConfettiView: View {
   @State private var confettiParticles: [ConfettiParticle] = []
-  var particleCount = 100
+  var particleCount = 200
   var particleSizeRange: ClosedRange<CGFloat> = 5...10
 
   var body: some View {
     GeometryReader { geometry in
       ZStack {
-//        Color.black // Apply the background color here to fill the entire view.
-//          .edgesIgnoringSafeArea(.all) // Make sure the background covers the whole screen.
-
         ForEach(confettiParticles) { particle in
           particle
         }
@@ -39,7 +34,7 @@ struct ConfettiView: View {
         id: index,
         color: .random, // Use the Color.random method.
         size: CGFloat.random(in: particleSizeRange),
-        initialPosition: CGPoint(x: xPosition - size.width / 2, y: yPosition) // Center it correctly.
+        initialPosition: CGPoint(x: xPosition, y: yPosition)
       )
     }
   }

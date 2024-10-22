@@ -5,6 +5,7 @@ import SwiftUI
 struct ScratchableOverlay: View {
   @ObservedObject var symbol: ScratchSymbolWrapper
   let gridSize: Int
+  let revealPercentage: Double = 50
 
   var body: some View {
     GeometryReader { geometry in
@@ -40,7 +41,7 @@ struct ScratchableOverlay: View {
 
   private func scratchCellsAt(x: Int, y: Int) {
     let gridSize = gridSize
-    let radius = 1 // Adjust radius as needed
+    let radius = 1
 
     let minX = max(0, x - radius)
     let maxX = min(gridSize - 1, x + radius)
@@ -64,7 +65,7 @@ struct ScratchableOverlay: View {
 
   private func checkIfFullyRevealed() {
     let scratchedPercentage = (Double(symbol.symbol.scratchedCells.count) / Double(symbol.symbol.totalCells)) * 100
-    if scratchedPercentage >= 90 {
+    if scratchedPercentage >= revealPercentage {
       symbol.symbol.isFullyRevealed = true
     }
   }
